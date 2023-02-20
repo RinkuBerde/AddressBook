@@ -17,21 +17,21 @@ namespace AddressBook
                 Console.WriteLine("press 2 to Add new Contact to list.");
                 Console.WriteLine("press 3 to Edit Contact in list.");
                 Console.WriteLine("press 4 to Delete a Contact from list.");
-                Console.WriteLine("press 5 to Exit.");
+                Console.WriteLine("press 5 to Add Multiple persons to Contact list.");
+                Console.WriteLine("press 6 to Exit.");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-
         public void Selection()
         {
             try
             {
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 5 || input <= 0)
+                while (input > 6 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -49,8 +49,6 @@ namespace AddressBook
                         Selection();
                         break;
                     case 2:
-                        //Add new Contact to list.
-                        Console.WriteLine("case 2:");
                         //Add New Contact
                         contactView.NewContact();
                         //display contacts count
@@ -76,10 +74,18 @@ namespace AddressBook
                         Selection();
                         break;
                     case 5:
+                        //adding multiple persons to contact list
+                        Console.WriteLine("Add multiple Persons to contacts.");
+                        contactView.MultipleContact();
+                        DisplayChoice();
+                        Selection();
+                        break;
+                    case 6:
                         //exit from program
                         Console.WriteLine("Exiting you safely...");
                         Console.WriteLine("Thank you.");
                         break;
+
                 }
             }
             catch (Exception e)
