@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace AddressBook
 {
+    //Display options for User.
     public class Display
     {
         MultipleAddressBook multipleAddressBook = new MultipleAddressBook();
         //Display user options for AddressBook.
         public void DisplayChoiceAddressBook()
         {
-
             Console.WriteLine("Press 1. to Add New Addressbook");
             Console.WriteLine("Press 2. to View All Addressbooks");
-            Console.WriteLine("Press 3. to Exit Program");
+            Console.WriteLine("Press 3. Search Contacts By City ");
+            Console.WriteLine("Press 4. to Exit Program");
             int mainInput = Convert.ToInt32(Console.ReadLine());
-            while (mainInput > 3 || mainInput < 0)
+            while (mainInput > 4 || mainInput < 0)
             {
                 Console.WriteLine("invalid input");
                 Console.WriteLine("Enter a valid input ");
@@ -46,6 +47,14 @@ namespace AddressBook
                     Selection(addressBookName);
                     break;
                 case 3:
+                    //Search the contacts according to city
+                    Console.WriteLine("Enter the Name of city:");
+                    string cityName = Console.ReadLine();
+                    //search method here
+                    multipleAddressBook.SearchContactsByCity(cityName);
+                    DisplayChoiceAddressBook();
+                    break;
+                case 4:
                     //exit the program
                     Console.WriteLine("Exiting you safely...");
                     Console.WriteLine("Thank you.");
@@ -65,8 +74,8 @@ namespace AddressBook
             Console.WriteLine("press 4 to Delete a Contact from list.");
             Console.WriteLine("press 5 to go back.");
         }
-        // switch case statement process for functionality performs crud operations for contacts
-        public void Selection(string addressBookName)
+            // switch case statement process for functionality performs crud operations for contacts
+            public void Selection(string addressBookName)
         {
             try
             {

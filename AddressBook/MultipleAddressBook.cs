@@ -12,7 +12,7 @@ namespace AddressBook
         public MultipleAddressBook()
         {
             dtAddressbook = new Dictionary<string, List<Contacts>>();
-        }     
+        }
         // ability to return addressBook Dictionary      
         public Dictionary<string, List<Contacts>> GetAddressBook()
         {
@@ -78,6 +78,21 @@ namespace AddressBook
                 }
             }
             return null;
+        }
+        public void SearchContactsByCity(string cityName)
+        {
+            foreach (KeyValuePair<string, List<Contacts>> item in dtAddressbook)
+            {
+                Console.WriteLine("Name of AddressBook: " + item.Key);
+                foreach (Contacts items in item.Value)
+                {
+                    if (items.City.Contains(cityName))
+                    {
+                        Console.WriteLine($"Name: {items.FirstName + " " + items.LastName}, Phone Number: {items.PhoneNumber}, City: {items.City}");
+                        Console.WriteLine();
+                    }
+                }
+            }
         }
     }
 }
