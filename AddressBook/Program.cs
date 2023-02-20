@@ -14,5 +14,5 @@
             display.Selection();
             contactView.DeleteContact();
         }
-    }    
+    } 
 }

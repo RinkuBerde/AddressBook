@@ -64,6 +64,7 @@ namespace AddressBook
                     case 3:
                         //Edit a contact from list
                         Console.WriteLine("Edit a Contact");
+                        contactView.EditContact();
                         DisplayChoice();
                         Selection();
                         break;
