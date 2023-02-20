@@ -9,14 +9,14 @@ namespace AddressBook
     interface IOperationalMethods
     {
         public void Listview(List<Contacts> contactsList);
-        public Contacts NewContact();
+        public Contacts NewContact(List<Contacts> contactsList);
         public void DeleteContact(List<Contacts> contactsList);
         public void EditContact(List<Contacts> contactsList);
     }
     class ContactView : IOperationalMethods
     {
-        public Contacts Person3 = new Contacts();      
-        // Display Contact details template.       
+        public Contacts Person3 = new Contacts();
+        // Display Contact details template.
         public void Listview(List<Contacts> contactsList)
         {
             try
@@ -45,12 +45,12 @@ namespace AddressBook
             }
         }
         // New contact method - ask user to enter all details. using console
-        public Contacts NewContact()
+        public Contacts NewContact(List<Contacts> contactsList)
         {
             try
             {
-                //global object 'Person3' is used.
-                CustomInput(Person3);
+                //global object 'Person3' is used.//
+                CustomInput(Person3, contactsList);
                 //validating contact details
                 Person3.ValidateContactDetails();
                 //adding contact to list
@@ -63,11 +63,11 @@ namespace AddressBook
                 Console.WriteLine("New contact entry aborted.");
             }
             return null;
-        }
-        /// delete a contact method using an index of list entered by user.
-        /// check for contacts available in list
-        /// if no contacts display message and end.
-        /// else ask for delete using index of list.
+        }       
+        // delete a contact method using an index of list entered by user.
+        // check for contacts available in list
+        // if no contacts display message and end.
+        // else ask for delete using index of list.      
         public void DeleteContact(List<Contacts> contactsList)
         {
             try
@@ -132,7 +132,7 @@ namespace AddressBook
                     CustomView(sel, contactsList);
                     Console.WriteLine("Enter new Details");
                     //global object 'Person3' is used.//
-                    CustomInput(Person3);
+                    CustomInput(Person3, contactsList);
                     //validating contact details
                     Person3.ValidateContactDetails();
                     //removing contact
@@ -150,8 +150,8 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }
         }
-        //custom display template for edit contact 
-        // sel- is parameter that passes appropriate selected contact index.
+        // custom display template for edit contact 
+        //sel- is parameter that passes appropriate selected contact index.
         private void CustomView(int sel, List<Contacts> contactsList)
         {
             Console.WriteLine();
@@ -162,11 +162,21 @@ namespace AddressBook
             Console.WriteLine($"Address: {contactsList[sel].Address}, \n \t{contactsList[sel].City}, {contactsList[sel].State}, {contactsList[sel].ZipCode}");
             Console.WriteLine();
         }
-        public void CustomInput(Contacts Person)
+
+        public void CustomInput(Contacts Person, List<Contacts> contactsList)
         {
             Console.WriteLine("Add a new contact.");
             Console.WriteLine("Enter First Name: ");
             Person.FirstName = Console.ReadLine();
+            //ability to check for duplicate entry of same person in particular addressBook
+            foreach (Contacts contacts in contactsList)
+            {
+                while (contacts.FirstName.Contains(Person.FirstName))
+                {
+                    Console.WriteLine("Name already exists in Contacts \n enter new name: ");
+                    Person.FirstName = Console.ReadLine();
+                }
+            }
             Console.WriteLine("Enter Last Name: ");
             Person.LastName = Console.ReadLine();
             Console.WriteLine("Enter Address: ");
