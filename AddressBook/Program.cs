@@ -12,6 +12,7 @@
             Display display = new Display();
             display.DisplayChoice();
             display.Selection();
+            contactView.DeleteContact();
         }
     }    
 }
