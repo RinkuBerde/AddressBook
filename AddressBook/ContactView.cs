@@ -33,7 +33,7 @@ namespace AddressBook
                         Console.WriteLine($"Phone Number: {i.PhoneNumber}");
                         Console.WriteLine($"Email: {i.Email}");
                         Console.WriteLine($"Address: {i.Address}");
-                        Console.WriteLine($"City:{i.City} "); 
+                        Console.WriteLine($"City:{i.City} ");
                         Console.WriteLine($"State:{i.State} ");
                         Console.WriteLine($"ZipCode:{i.ZipCode} ");
                     }
@@ -63,11 +63,11 @@ namespace AddressBook
                 Console.WriteLine("New contact entry aborted.");
             }
             return null;
-        }      
+        }
         // delete a contact method using an index of list entered by user.
         // check for contacts available in list
         // if no contacts display message and end.
-        // else ask for delete using index of list.       
+        // else ask for delete using index of list.
         public void DeleteContact(List<Contacts> contactsList)
         {
             try
@@ -100,9 +100,9 @@ namespace AddressBook
             {
                 Console.WriteLine(e.Message);
             }
-        }        
+        }
         // edit a contact using a index ask ask for details and replace
-        // the details with appropriate details.      
+        // the details with appropriate details.
         public void EditContact(List<Contacts> contactsList)
         {
             try
@@ -145,13 +145,14 @@ namespace AddressBook
                     CustomView(sel, contactsList);
                 }
             }
+
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        // custom display tem   plate for edit contact 
-        // sel- is parameter that passes appropriate selected contact index.    
+        /// custom display template for edit contact 
+        /// sel- is parameter that passes appropriate selected contact index.
         private void CustomView(int sel, List<Contacts> contactsList)
         {
             Console.WriteLine();
@@ -217,6 +218,57 @@ namespace AddressBook
             }
             Console.WriteLine("Enter Email: ");
             Person.Email = Console.ReadLine();
+        }
+        // ability to import contacts from a file
+        public void ImportContacts(string addressBookName, Dictionary<string, List<Contacts>> addressBook)
+        {
+            List<Contacts> contactsList = addressBook[addressBookName];
+            string filepath = @"C:\Users\RINKU\Desktop\SQLAssignment\AddressBook\AddressBook\Contact.txt";
+            if (File.Exists(filepath))
+            {
+                string[] contactsArray = File.ReadAllLines(filepath);
+                for (int i = 1; i < contactsArray.Length; i++)
+                {
+                    Contacts contact = new Contacts();
+                    string[] data = contactsArray[i].Split(',');
+                    contact.FirstName = data[0];
+                    contact.LastName = data[1];
+                    contact.Address = data[2];
+                    contact.City = data[3];
+                    contact.State = data[4];
+                    contact.ZipCode = Convert.ToInt32(data[5]);
+                    contact.PhoneNumber = Convert.ToInt64(data[6]);
+                    contact.Email = data[7];
+                    contact.ValidateContactDetails();
+                    contactsList.Add(contact);
+                }
+                addressBook[addressBookName] = contactsList;
+            }
+            else
+            {
+                Console.WriteLine("File Not Found");
+            }
+        }
+        // ability to Export contacts to a file
+        public void ExportContacts(List<Contacts> contactsList)
+        {
+            string[] contactArray = new string[contactsList.Count];
+            string filepath = @"C:\Users\RINKU\Desktop\SQLAssignment\AddressBook\AddressBook\Contact.txt";
+            if (File.Exists(filepath))
+            {
+                for (int i = 0; i < contactsList.Count; i++)
+                {
+                    Contacts contact = contactsList[i];
+                    contactArray[i] = contact.FirstName + ',' + contact.LastName + ',' + contact.Address + ',' + contact.City + ',' + contact.State + ',' + Convert.ToString(contact.ZipCode) + ',' + Convert.ToString(contact.PhoneNumber) + ',' + contact.Email;
+                }
+
+                File.AppendAllLines(filepath, contactArray, Encoding.UTF8);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+            }
+
         }
     }
 }

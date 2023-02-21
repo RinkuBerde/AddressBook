@@ -91,8 +91,10 @@ namespace AddressBook
             Console.WriteLine("press 2 to Add new Contact to list.");
             Console.WriteLine("press 3 to Edit Contact in list.");
             Console.WriteLine("press 4 to Delete a Contact from list.");
-            Console.WriteLine("press 5 Sort Contacts");
-            Console.WriteLine("press 6 to go back.");
+            Console.WriteLine("press 5 to Sort Contacts");
+            Console.WriteLine("press 6 to Import Contacts");
+            Console.WriteLine("press 7 to Export Contacts.");
+            Console.WriteLine("press 8 to go back.");
         }
         // switch case statement process for functionality performs crud operations for contacts
         public void Selection(string addressBookName)
@@ -102,7 +104,7 @@ namespace AddressBook
                 Dictionary<string, List<Contacts>> addressBook = multipleAddressBook.GetAddressBook();
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 6 || input <= 0)
+                while (input > 8 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -162,6 +164,21 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 6:
+                        //Import contacts from a file
+                        contactView.ImportContacts(addressBookName, addressBook);
+                        Console.WriteLine("Import SuccessFull!!");
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 7:
+                        contacts = addressBook[addressBookName];
+                        //Export contacts from a file
+                        contactView.ExportContacts(contacts);
+                        Console.WriteLine("Export SuccessFull!!");
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 8:
                         //exit from Contacts
                         DisplayChoiceAddressBook();
                         break;
@@ -175,6 +192,7 @@ namespace AddressBook
             {
                 Console.WriteLine(e.Message);
             }
+
         }
     }
 }

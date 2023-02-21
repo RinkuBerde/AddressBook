@@ -17,6 +17,7 @@ namespace AddressBook
             dtCities = new Dictionary<string, List<Contacts>>();
             dtStates = new Dictionary<string, List<Contacts>>();
         }
+
         // ability to return addressBook Dictionary
         public Dictionary<string, List<Contacts>> GetAddressBook()
         {
@@ -42,7 +43,6 @@ namespace AddressBook
                 switch (ch)
                 {
                     case 'Y':
-
                         ContactView contact = new ContactView();
                         Contacts newContact = contact.NewContact(contactsList);
                         if (newContact != null)
@@ -62,7 +62,7 @@ namespace AddressBook
                 return true;
             }
         }
-        // an uitility to add contacts to city and state dictionary
+        // ability to return addressBook Dictionary
         public void UtilityToAddContactToCityState(Contacts newContact)
         {
             List<Contacts> cityList = new List<Contacts>();
@@ -133,7 +133,10 @@ namespace AddressBook
             Console.WriteLine("Sorted Contacts By City: ");
             view.Listview(contactsList);
         }
-      // ability to sort the contacts in list by Person's City
+        /// <summary>
+        /// ability to sort the contacts in list by Person's City
+        /// </summary>
+        /// <param name="contactsList"></param>
         public void SortAddressBookByState(List<Contacts> contactsList)
         {
             ContactView view = new ContactView();
@@ -141,7 +144,11 @@ namespace AddressBook
             Console.WriteLine("Sorted Contacts By State: ");
             view.Listview(contactsList);
         }
-        // ability to sort the contacts in list by Person's City
+
+        /// <summary>
+        /// ability to sort the contacts in list by Person's City
+        /// </summary>
+        /// <param name="contactsList"></param>
         public void SortAddressBookByZipcode(List<Contacts> contactsList)
         {
             ContactView view = new ContactView();
@@ -149,7 +156,10 @@ namespace AddressBook
             Console.WriteLine("Sorted Contacts By Zipcode: ");
             view.Listview(contactsList);
         }
-        // view Contacts by Cities
+
+        /// <summary>
+        /// view Contacts by Cities
+        /// </summary>
         public void DisplayContactsByCities()
         {
             if (dtCities.Count == 0)
