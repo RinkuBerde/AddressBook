@@ -10,7 +10,6 @@ namespace AddressBook
     public class Display
     {
         MultipleAddressBook multipleAddressBook = new MultipleAddressBook();
-        //Display user options for AddressBook.
         public void DisplayChoiceAddressBook()
         {
 
@@ -83,7 +82,9 @@ namespace AddressBook
                     break;
             }
         }
-        // user input display choice for crud operations in contacts
+        /// <summary>
+        /// user input display choice for crud operations in contacts
+        /// </summary>
         public void DisplayChoice()
         {
             Console.WriteLine();
@@ -93,7 +94,10 @@ namespace AddressBook
             Console.WriteLine("press 4 to Delete a Contact from list.");
             Console.WriteLine("press 5 to go back.");
         }
-        // switch case statement process for functionality performs crud operations for contacts
+        /// <summary>
+        /// switch case statement process for functionality performs crud operations for contacts
+        /// </summary>
+        /// <param name="addressBookName"> name of the addressbook</param>
         public void Selection(string addressBookName)
         {
             try

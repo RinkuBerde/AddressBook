@@ -33,7 +33,7 @@ namespace AddressBook
                         Console.WriteLine($"Phone Number: {i.PhoneNumber}");
                         Console.WriteLine($"Email: {i.Email}");
                         Console.WriteLine($"Address: {i.Address}");
-                        Console.WriteLine($"City:{i.City} ");
+                        Console.WriteLine($"City:{i.City} "); 
                         Console.WriteLine($"State:{i.State} ");
                         Console.WriteLine($"ZipCode:{i.ZipCode} ");
                     }
@@ -63,11 +63,11 @@ namespace AddressBook
                 Console.WriteLine("New contact entry aborted.");
             }
             return null;
-        }       
-        /// delete a contact method using an index of list entered by user.
-        /// check for contacts available in list
-        /// if no contacts display message and end.
-        /// else ask for delete using index of list.      
+        }      
+        // delete a contact method using an index of list entered by user.
+        // check for contacts available in list
+        // if no contacts display message and end.
+        // else ask for delete using index of list.       
         public void DeleteContact(List<Contacts> contactsList)
         {
             try
@@ -100,9 +100,9 @@ namespace AddressBook
             {
                 Console.WriteLine(e.Message);
             }
-        }
+        }        
         // edit a contact using a index ask ask for details and replace
-       // the details with appropriate details.
+        // the details with appropriate details.      
         public void EditContact(List<Contacts> contactsList)
         {
             try
@@ -150,9 +150,8 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }
         }
-
-       // custom display template for edit contact
-       // sel- is parameter that passes appropriate selected contact index.
+        // custom display tem   plate for edit contact 
+        // sel- is parameter that passes appropriate selected contact index.    
         private void CustomView(int sel, List<Contacts> contactsList)
         {
             Console.WriteLine();
