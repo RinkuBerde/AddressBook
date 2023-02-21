@@ -38,8 +38,8 @@ namespace AddressBook
                         Console.WriteLine($"Full Name: {i.FirstName} {i.LastName}");
                         Console.WriteLine($"Phone Number: {i.PhoneNumber}");
                         Console.WriteLine($"Email: {i.Email}");
-                        Console.WriteLine($"Address: {i.Address},");
-                        Console.WriteLine($"City:{i.City} ");
+                        Console.WriteLine($"Address: {i.Address}");
+                        Console.WriteLine($"City:{i.City} "); 
                         Console.WriteLine($"State:{i.State} "); 
                         Console.WriteLine($"ZipCode:{i.ZipCode} ");
                     }
@@ -73,7 +73,8 @@ namespace AddressBook
         // delete a contact method using an index of list entered by user.
         // check for contacts available in list
         // if no contacts display message and end.
-        // else ask for delete using index of list.       
+        // else ask for delete using index of list.
+
         public void DeleteContact(List<Contacts> contactsList)
         {
             try
@@ -107,8 +108,8 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }
         }
-        /// edit a contact using a index ask ask for details and replace
-        /// the details with appropriate details.
+        // edit a contact using a index ask ask for details and replace
+        // the details with appropriate details.
         public void EditContact(List<Contacts> contactsList)
         {
             try
@@ -163,7 +164,7 @@ namespace AddressBook
         // ability to update contact in database
         private void EditContactDatabase(string name, Contacts contact)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog= Address_Book1;Integrated Security=True;Pooling=False";
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book1;Integrated Security=True;Pooling=False";
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
@@ -341,7 +342,7 @@ namespace AddressBook
         // ability to retireve contacts from database
         public void GetContactsFromDataBase(List<Contacts> contactList)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB Address_Book1;Initial Catalog=AddressBookDatabase;Integrated Security=True;Pooling=False";
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book1;Integrated Security=True;Pooling=False";
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
@@ -366,6 +367,59 @@ namespace AddressBook
                             Email = dr.GetString(7)
                         };
                         contactList.Add(contact);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        // ability to view contacts that were added to database at particular period
+        public void GetContactsFromDataBase(string date)
+        {
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book1;Integrated Security=True;Pooling=False";
+            SqlConnection connection = new SqlConnection(connectionString);
+            List<Contacts> contactList = new List<Contacts>();
+            try
+            {
+                using (connection)
+                {
+                    string spName = "dbo.SpGetContactByDate";
+                    SqlCommand command = new SqlCommand(spName, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    connection.Open();
+                    command.Parameters.AddWithValue("@date", date);
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Contacts contact = new Contacts
+                        {
+                            FirstName = dr.GetString(0),
+                            LastName = dr.GetString(1),
+                            Address = dr.GetString(2),
+                            City = dr.GetString(3),
+                            State = dr.GetString(4),
+                            ZipCode = dr.GetInt32(5),
+                            PhoneNumber = dr.GetInt64(6),
+                            Email = dr.GetString(7)
+                        };
+                        contactList.Add(contact);
+                    }
+                    Console.WriteLine($"Contacts added within {date}: ");
+                    Console.WriteLine();
+                    if (contactList.Count == 0)
+                    {
+                        Console.WriteLine("no records found");
+                    }
+                    if (contactList.Count >= 1)
+                    {
+                        Console.WriteLine($"{contactList.Count} records found");
+                        Listview(contactList);
                     }
                 }
             }
