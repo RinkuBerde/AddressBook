@@ -13,7 +13,6 @@ namespace AddressBook
         //Display user options for AddressBook.
         public void DisplayChoiceAddressBook()
         {
-
             Console.WriteLine("Press 1. to Add New Addressbook");
             Console.WriteLine("Press 2. to perform CRUD Operations in Addressbooks");
             Console.WriteLine("Press 3. Search Contacts By City ");
@@ -217,6 +216,5 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }
         }
-
     }
 }
