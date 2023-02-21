@@ -10,9 +10,7 @@ namespace AddressBook
     public class Display
     {
         MultipleAddressBook multipleAddressBook = new MultipleAddressBook();
-        /// <summary>
-        ///Display user options for AddressBook.
-        /// </summary>
+        //Display user options for AddressBook.
         public void DisplayChoiceAddressBook()
         {
 
@@ -85,9 +83,7 @@ namespace AddressBook
                     break;
             }
         }
-        /// <summary>
-        /// user input display choice for crud operations in contacts
-        /// </summary>
+        // user input display choice for crud operations in contacts
         public void DisplayChoice()
         {
             Console.WriteLine();
@@ -100,12 +96,10 @@ namespace AddressBook
             Console.WriteLine("press 7 to Export Contacts to csv file.");
             Console.WriteLine("press 8 to get contact from json file");
             Console.WriteLine("press 9 to set contascts to json file.");
-            Console.WriteLine("press 10 to go back.");
+            Console.WriteLine("press 10 to get contacts from database.");
+            Console.WriteLine("press 11 to go back.");
         }
-        /// <summary>
-        /// switch case statement process for functionality performs crud operations for contacts
-        /// </summary>
-        /// <param name="addressBookName"> name of the addressbook</param>
+        // switch case statement process for functionality performs crud operations for contacts
         public void Selection(string addressBookName)
         {
             try
@@ -113,7 +107,7 @@ namespace AddressBook
                 Dictionary<string, List<Contacts>> addressBook = multipleAddressBook.GetAddressBook();
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 9 || input <= 0)
+                while (input > 11 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -202,7 +196,14 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 10:
-                        //exit from Contacts
+                        //retireve contacts from database
+                        contacts = addressBook[addressBookName];
+                        contactView.GetContactsFromDataBase(contacts);
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 11:
+                        //exit from Contact
                         DisplayChoiceAddressBook();
                         break;
                     default:
@@ -216,5 +217,6 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }
         }
+
     }
 }
