@@ -1,0 +1,5 @@
+﻿﻿FirstName,LastName,address,city,state,zipcode,phoneNumber,email
+Rinku,Berde,sp nagar,Mysore,karnataka,123456,2341243144,rinkuberde123@gmail.com
+swayam,Mane,Hanuman nagar,kamlapur,karnataka,123456,2341243144,swayammane@gmail.com
+Virat,singh,Versova nagar,hampi,karnataka,123456,2341243144,viratsingh@gmail.com
+Rohit,Bane,Juhu Nahar,bellari,karnataka,123456,2341243144,banerohit@gmail.com
