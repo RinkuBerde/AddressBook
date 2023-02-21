@@ -10,6 +10,7 @@ namespace AddressBook
     public class Display
     {
         MultipleAddressBook multipleAddressBook = new MultipleAddressBook();
+        //Display user options for AddressBook.
         public void DisplayChoiceAddressBook()
         {
 
@@ -92,7 +93,8 @@ namespace AddressBook
             Console.WriteLine("press 2 to Add new Contact to list.");
             Console.WriteLine("press 3 to Edit Contact in list.");
             Console.WriteLine("press 4 to Delete a Contact from list.");
-            Console.WriteLine("press 5 to go back.");
+            Console.WriteLine("press 5 Sort Contacts");
+            Console.WriteLine("press 6 to go back.");
         }
         /// <summary>
         /// switch case statement process for functionality performs crud operations for contacts
@@ -105,7 +107,7 @@ namespace AddressBook
                 Dictionary<string, List<Contacts>> addressBook = multipleAddressBook.GetAddressBook();
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 7 || input <= 0)
+                while (input > 6 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -155,6 +157,13 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 5:
+                        //Sort Contacts
+                        contacts = addressBook[addressBookName];
+                        multipleAddressBook.SortAddressBookByName(contacts);
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 6:
                         //exit from Contacts
                         DisplayChoiceAddressBook();
                         break;

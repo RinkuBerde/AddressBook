@@ -21,7 +21,7 @@ namespace AddressBook
         public Dictionary<string, List<Contacts>> GetAddressBook()
         {
             return dtAddressbook;
-        }       
+        }
         // create a new address book check for name,
         // if already exists then, wont create new.
         public bool AddAddressBook(string name)
@@ -85,7 +85,7 @@ namespace AddressBook
             if (dtStates.ContainsKey(newContact.State))
             {
                 dtStates[newContact.State].Add(newContact);
-                Console.WriteLine($"Contact Added to CityList: {newContact.State}");
+                Console.WriteLine($"Contact Added to StateList: {newContact.State}");
             }
             if (newContact.State != null && !dtStates.ContainsKey(newContact.State))
             {
@@ -116,6 +116,14 @@ namespace AddressBook
                 }
             }
             return null;
+        }
+        // ability to sort the contacts in list by Person's name
+        public void SortAddressBookByName(List<Contacts> contactsList)
+        {
+            ContactView view = new ContactView();
+            contactsList.Sort((contact1, contact2) => contact1.FirstName.CompareTo(contact2.FirstName));
+            Console.WriteLine("Sorted Contacts By Name: ");
+            view.Listview(contactsList);
         }
         // view Contacts by Cities
         public void DisplayContactsByCities()
