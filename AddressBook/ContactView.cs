@@ -39,8 +39,8 @@ namespace AddressBook
                         Console.WriteLine($"Phone Number: {i.PhoneNumber}");
                         Console.WriteLine($"Email: {i.Email}");
                         Console.WriteLine($"Address: {i.Address}");
-                        Console.WriteLine($"City:{i.City} "); 
-                        Console.WriteLine($"State:{i.State} "); 
+                        Console.WriteLine($"City:{i.City} ");
+                        Console.WriteLine($"State:{i.State} ");
                         Console.WriteLine($"ZipCode:{i.ZipCode} ");
                     }
                 }
@@ -198,7 +198,7 @@ namespace AddressBook
             }
         }
         // custom display template for edit contact 
-        // sel- is parameter that passes appropriate selected contact index.
+        //sel- is parameter that passes appropriate selected contact index.
         private void CustomView(int sel, List<Contacts> contactsList)
         {
             Console.WriteLine();
@@ -367,6 +367,38 @@ namespace AddressBook
                             Email = dr.GetString(7)
                         };
                         contactList.Add(contact);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        // ability to get count by city from database
+        public void GetCountByCity()
+        {
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book1;Integrated Security=True;Pooling=False";
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    string spName = "dbo.SpGetCountByCity";
+                    SqlCommand command = new SqlCommand(spName, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    connection.Open();
+                    SqlDataReader dr = command.ExecuteReader();
+                    int count = 0; string city;
+                    while (dr.Read())
+                    {
+                        count = dr.GetInt32(0);
+                        city = dr.GetString(1);
+                        Console.WriteLine($"City: {city}, No of Contacts: {count}");
                     }
                 }
             }

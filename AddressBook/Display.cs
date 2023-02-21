@@ -97,7 +97,8 @@ namespace AddressBook
             Console.WriteLine("press 9 to set contascts to json file.");
             Console.WriteLine("press 10 to get contacts from database.");
             Console.WriteLine("press 11 to view contacts from database by date.");
-            Console.WriteLine("press 12 to go back.");
+            Console.WriteLine("press 12 to get count of cities in contacts.");
+            Console.WriteLine("press 13 to go back.");
         }
         // switch case statement process for functionality performs crud operations for contacts
         public void Selection(string addressBookName)
@@ -107,7 +108,7 @@ namespace AddressBook
                 Dictionary<string, List<Contacts>> addressBook = multipleAddressBook.GetAddressBook();
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 12 || input <= 0)
+                while (input > 13 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -217,6 +218,12 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 12:
+                        //get count of cities in database
+                        contactView.GetCountByCity();
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 13:
                         //exit from Contact
                         DisplayChoiceAddressBook();
                         break;
