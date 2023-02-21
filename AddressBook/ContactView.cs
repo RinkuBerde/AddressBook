@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using static AddressBook.Contacts;
 
 namespace AddressBook
 {
@@ -32,7 +36,7 @@ namespace AddressBook
                         Console.WriteLine($"Full Name: {i.FirstName} {i.LastName}");
                         Console.WriteLine($"Phone Number: {i.PhoneNumber}");
                         Console.WriteLine($"Email: {i.Email}");
-                        Console.WriteLine($"Address: {i.Address}, "); 
+                        Console.WriteLine($"Address: {i.Address},");
                         Console.WriteLine($"City:{i.City} "); 
                         Console.WriteLine($"State:{i.State} ");
                         Console.WriteLine($"ZipCode:{i.ZipCode} ");
@@ -63,11 +67,11 @@ namespace AddressBook
                 Console.WriteLine("New contact entry aborted.");
             }
             return null;
-        }    
+        }
         // delete a contact method using an index of list entered by user.
         // check for contacts available in list
         // if no contacts display message and end.
-        // else ask for delete using index of list.    
+        // else ask for delete using index of list.
         public void DeleteContact(List<Contacts> contactsList)
         {
             try
@@ -248,7 +252,7 @@ namespace AddressBook
                 Console.WriteLine("File Not Found");
             }
         }
-        /// ability to Export contacts to a csv file
+        // ability to Export contacts to a csv file
         public void ExportContacts(List<Contacts> contactsList)
         {
             string[] contactArray = new string[contactsList.Count];
@@ -268,6 +272,29 @@ namespace AddressBook
                 Console.WriteLine("File not found");
             }
 
+        }
+        // ability to read contacts list from json file
+        public void GetJsonData(List<Contacts> contactlist)
+        {
+            string filepath = @"C:\Users\RINKU\Desktop\SQLAssignment\AddressBook\AddressBook\jsonFile.json";
+            string jObject = File.ReadAllText(filepath);
+            Root root = JsonConvert.DeserializeObject<Root>(jObject);
+            contactlist.AddRange(root.contacts);
+            Console.WriteLine("Import successfull");
+        }
+       // ability to write contacts list to json file
+        public void SetJsonData(List<Contacts> contactlist)
+        {
+            string filepath = @"C:\Users\RINKU\Desktop\SQLAssignment\AddressBook\AddressBook\jsonFile.json";
+            Contacts contact = NewContact(contactlist);
+            contactlist.Add(contact);
+            Root root = new Root
+            {
+                contacts = contactlist
+            };
+            string contactdata = JsonConvert.SerializeObject(root, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(filepath, contactdata);
+            Console.WriteLine("Emport successfull");
         }
     }
 }

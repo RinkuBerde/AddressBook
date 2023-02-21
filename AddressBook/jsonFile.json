@@ -1,0 +1,44 @@
+﻿{
+  "contacts": [
+    {
+      "FirstName": "Rinku",
+      "LastName": "Berde",
+      "Address": "sp nagar",
+      "City": "Mysore",
+      "State": "karnataka",
+      "ZipCode": 12345,
+      "PhoneNumber": 1234567890,
+      "Email": "rinkuberde123@gmail.com"
+    },
+    {
+      "FirstName": "swayam",
+      "LastName": "Mane",
+      "Address": "Hanuman nagar",
+      "City": "kamlapur",
+      "State": "karnataka",
+      "ZipCode": 123456,
+      "PhoneNumber": 2341243144,
+      "Email": "swayammane@gmail.com"
+    },
+    {
+      "FirstName": "Virat",
+      "LastName": "singh",
+      "Address": ",Versova nagar",
+      "City": "hampi",
+      "State": "karnataka",
+      "ZipCode": 123456,
+      "PhoneNumber": 2341243144,
+      "Email": "viratsingh@gmail.com"
+    },
+    {
+      "FirstName": "Rohit",
+      "LastName": "Bane",
+      "Address": "Juhu Nahar",
+      "City": "bellari",
+      "State": "karnataka",
+      "ZipCode": 123456,
+      "PhoneNumber": 2341243144,
+      "Email": "banerohit@gmail.com"
+    }
+  ]
+}

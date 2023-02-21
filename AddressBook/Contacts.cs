@@ -10,7 +10,7 @@ namespace AddressBook
     {
         void ValidateContactDetails();
     }
-    class Contacts : IContactDetails
+    public class Contacts : IContactDetails
     {
         //variables
         private string firstName;
@@ -118,6 +118,12 @@ namespace AddressBook
                 email = value;
             }
         }
+        // class to access json file
+        public class Root
+        {
+            public List<Contacts> contacts { get; set; }
+        }
+
         private bool ValidateFullName(string firstName, string lastName)
         {
             FirstName = firstName;
