@@ -125,6 +125,30 @@ namespace AddressBook
             Console.WriteLine("Sorted Contacts By Name: ");
             view.Listview(contactsList);
         }
+        // ability to sort the contacts in list by Person's City
+        public void SortAddressBookByCity(List<Contacts> contactsList)
+        {
+            ContactView view = new ContactView();
+            contactsList.Sort((contact1, contact2) => contact1.City.CompareTo(contact2.City));
+            Console.WriteLine("Sorted Contacts By City: ");
+            view.Listview(contactsList);
+        }
+      // ability to sort the contacts in list by Person's City
+        public void SortAddressBookByState(List<Contacts> contactsList)
+        {
+            ContactView view = new ContactView();
+            contactsList.Sort((contact1, contact2) => contact1.State.CompareTo(contact2.State));
+            Console.WriteLine("Sorted Contacts By State: ");
+            view.Listview(contactsList);
+        }
+        // ability to sort the contacts in list by Person's City
+        public void SortAddressBookByZipcode(List<Contacts> contactsList)
+        {
+            ContactView view = new ContactView();
+            contactsList.Sort((contact1, contact2) => contact1.ZipCode.CompareTo(contact2.ZipCode));
+            Console.WriteLine("Sorted Contacts By Zipcode: ");
+            view.Listview(contactsList);
+        }
         // view Contacts by Cities
         public void DisplayContactsByCities()
         {

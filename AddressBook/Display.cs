@@ -83,9 +83,7 @@ namespace AddressBook
                     break;
             }
         }
-        /// <summary>
-        /// user input display choice for crud operations in contacts
-        /// </summary>
+        // user input display choice for crud operations in contacts
         public void DisplayChoice()
         {
             Console.WriteLine();
@@ -96,10 +94,7 @@ namespace AddressBook
             Console.WriteLine("press 5 Sort Contacts");
             Console.WriteLine("press 6 to go back.");
         }
-        /// <summary>
-        /// switch case statement process for functionality performs crud operations for contacts
-        /// </summary>
-        /// <param name="addressBookName"> name of the addressbook</param>
+        // switch case statement process for functionality performs crud operations for contacts
         public void Selection(string addressBookName)
         {
             try
@@ -157,9 +152,12 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 5:
-                        //Sort Contacts
+                        //Sort Contacts By Person's Name, City, State, Zipcode
                         contacts = addressBook[addressBookName];
                         multipleAddressBook.SortAddressBookByName(contacts);
+                        multipleAddressBook.SortAddressBookByCity(contacts);
+                        multipleAddressBook.SortAddressBookByState(contacts);
+                        multipleAddressBook.SortAddressBookByZipcode(contacts);
                         DisplayChoice();
                         Selection(addressBookName);
                         break;
